@@ -72,9 +72,14 @@ exports.onMessageReceived = (function ShortURLs(bot, doc, user, userID, channelI
 
     if (arguments.length > 2) {
       bot.sendMessage({
-        to: channelID,
-        message: ':x: Please encode spaces in your long URL (`%20`) and make sure you didn\'t use two words for your URL shortener type.'
-      })
+        to: event.d.channel_id,
+        embed: {
+          title: 'Error',
+          color: 0xdd2e44,
+          timestamp: new Date(),
+          description: ':x: Please encode spaces in your long URL (`%20`) and make sure you didn\'t use two words for your URL shortener type.'
+        }
+      });
     } else if (shorteners['goo.gl'].indexOf(arguments[1]) > -1) {
       // do goo.gl api call here
       googleShorten(arguments[0], bot, event, doc);
