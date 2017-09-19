@@ -1,6 +1,7 @@
 const google = require('googleapis'); // will need later for goo.gl
 const util = require('util');
 const trun = require('truncate');
+const request = require("request");
 
 function randInt(min, max) {
   min = Math.ceil(min);
@@ -22,6 +23,21 @@ const shorteners = {
 };
 
 function googleShorten(longUrl, bot, event, doc) {
+  var options = { method: 'POST',
+    url: 'https://www.googleapis.com/urlshortener/v1/url',
+    qs: { key: doc.googleShortenKey },
+    headers: { 'content-type': 'application/json' },
+    body: { longUrl: 'http://www.google.com/' },
+    json: true };
+
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    bot.sendMessage({
+      to: channelID,
+      message: body.id
+    })
+});
 
 }
 function bitShorten(longUrl, bot, event, doc) {
