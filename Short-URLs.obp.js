@@ -23,14 +23,22 @@ const shorteners = {
 };
 
 function googleShorten(longUrl, bot, event, doc) {
-  var options = { method: 'POST',
+  var options = {
+    method: 'POST',
     url: 'https://www.googleapis.com/urlshortener/v1/url',
-    qs: { key: doc.googleShortenKey },
-    headers: { 'content-type': 'application/json' },
-    body: { longUrl: longUrl },
-    json: true };
+    qs: {
+      key: doc.googleShortenKey
+    },
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: {
+      longUrl: longUrl
+    },
+    json: true
+  };
 
-  request(options, function (error, response, body) {
+  request(options, function(error, response, body) {
     if (error) throw new Error(error);
 
     bot.sendMessage({
@@ -40,8 +48,7 @@ function googleShorten(longUrl, bot, event, doc) {
         color: 0x77b255,
         timestamp: new Date(),
         description: ':white_check_mark: The URL was sucessfully shortened.',
-        fields: [
-          {
+        fields: [{
             name: 'Short URL',
             value: body.id
           },
@@ -52,42 +59,45 @@ function googleShorten(longUrl, bot, event, doc) {
         ]
       }
     });
-});
+  });
 }
+
 function bitShorten(longUrl, bot, event, doc) {
-  var options = { method: 'GET',
-  url: 'https://api-ssl.bitly.com/v3/shorten',
-  qs:
-   { access_token: doc.bitlyShortenKey,
-     longUrl: longUrl },
-  headers:
-   { 'cache-control': 'no-cache' }
- };
+  var options = {
+    method: 'GET',
+    url: 'https://api-ssl.bitly.com/v3/shorten',
+    qs: {
+      access_token: doc.bitlyShortenKey,
+      longUrl: longUrl
+    },
+    headers: {
+      'cache-control': 'no-cache'
+    }
+  };
 
-request(options, function (error, response, body) {
-  var data = JSON.parse(body).data
-  if (error) throw new Error(error);
-      bot.sendMessage({
-        to: event.d.channel_id,
-        embed: {
-          title: 'Shortened URL',
-          color: 0x77b255,
-          timestamp: new Date(),
-          description: ':white_check_mark: The URL was sucessfully shortened.',
-          fields: [
-            {
-              name: 'Short URL',
-              value: data.url
-            },
-            {
-              name: 'Long URL',
-              value: data.long_url
-            }
-          ]
-        }
-      });
+  request(options, function(error, response, body) {
+    var data = JSON.parse(body).data
+    if (error) throw new Error(error);
+    bot.sendMessage({
+      to: event.d.channel_id,
+      embed: {
+        title: 'Shortened URL',
+        color: 0x77b255,
+        timestamp: new Date(),
+        description: ':white_check_mark: The URL was sucessfully shortened.',
+        fields: [{
+            name: 'Short URL',
+            value: data.url
+          },
+          {
+            name: 'Long URL',
+            value: data.long_url
+          }
+        ]
+      }
+    });
 
-});
+  });
 }
 
 exports.onMessageReceived = (function ShortURLs(bot, doc, user, userID, channelID, message, event) {
