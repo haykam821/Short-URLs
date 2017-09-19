@@ -2,6 +2,12 @@ const google = require('googleapis'); // will need later for goo.gl
 const util = require('util');
 const trun = require('truncate');
 
+function randInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 const shorteners = {
   'goo.gl': [
     'goo.gl',
@@ -59,6 +65,18 @@ exports.onMessageReceived = (function ShortURLs(bot, doc, user, userID, channelI
       owlShorten(arguments[0], bot, event);
     } else if (arguments[1] == undefined) {
       // random shortener
+      var shortenerId = randInt(0, 2);
+
+      if (shortenerId === 0) {
+        // do goo.gl api call here
+        googleShorten(arguments[0], bot, event);
+      } else if (shortenerId === 1) {
+        // do bit.ly api call here
+        bitShorten(arguments[0], bot, event);
+      } else if (shortenerId === 2) {
+        // do ow.ly api call here
+        owlShorten(arguments[0], bot, event);
+      }
     } else {
       bot.sendMessage({
         to: channelID,
