@@ -17,7 +17,7 @@ The `longUrl` parameter works as you think it would. Paste almost any URL that y
 The `shortener` parameter is less required and chooses which domain the shortened URL will use if given, or pick a random one if left out. You can shorten into these domains:
 
 * `goo.gl`
-* `bit.ly` (not really but soon™)
+* `bit.ly`
 
 You can also write close matches such as `google` or `bitly`, and Onebot will still accept it.
 
