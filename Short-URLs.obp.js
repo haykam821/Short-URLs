@@ -21,10 +21,10 @@ const shorteners = {
   ]
 };
 
-function googleShorten(longUrl, bot, event) {
+function googleShorten(longUrl, bot, event, doc) {
 
 }
-function bitShorten(longUrl, bot, event) {
+function bitShorten(longUrl, bot, event, doc) {
 
 }
 
@@ -47,20 +47,20 @@ exports.onMessageReceived = (function ShortURLs(bot, doc, user, userID, channelI
       })
     } else if (shorteners['goo.gl'].indexOf(arguments[1]) > -1) {
       // do goo.gl api call here
-      googleShorten(arguments[0], bot, event);
+      googleShorten(arguments[0], bot, event, doc);
     } else if (shorteners['bit.ly'].indexOf(arguments[1]) > -1) {
       // do bit.ly api call here
-      bitShorten(arguments[0], bot, event);
+      bitShorten(arguments[0], bot, event, doc);
     } else if (arguments[1] == undefined) {
       // random shortener
       var shortenerId = randInt(0, 1);
 
       if (shortenerId === 0) {
         // do goo.gl api call here
-        googleShorten(arguments[0], bot, event);
+        googleShorten(arguments[0], bot, event, doc);
       } else if (shortenerId === 1) {
         // do bit.ly api call here
-        bitShorten(arguments[0], bot, event);
+        bitShorten(arguments[0], bot, event, doc);
       }
     } else {
       bot.sendMessage({
