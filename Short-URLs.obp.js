@@ -94,8 +94,13 @@ exports.onMessageReceived = (function ShortURLs(bot, doc, user, userID, channelI
       }
     } else {
       bot.sendMessage({
-        to: channelID,
-        message: `:x: There is no shortener by the name of \`${arguments[1]}\`!`
+        to: event.d.channel_id,
+        embed: {
+          title: 'Error',
+          color: 0xdd2e44,
+          timestamp: new Date(),
+          description: `:x: There is no shortener by the name of \`${arguments[1]}\`!`
+        }
       });
     }
   }
