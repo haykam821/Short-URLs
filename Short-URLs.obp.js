@@ -57,8 +57,13 @@ exports.onMessageReceived = (function ShortURLs(bot, doc, user, userID, channelI
     } else if (shorteners['ow.ly'].indexOf(arguments[1]) > -1) {
       // do ow.ly api call here
       owlShorten(arguments[0], bot, event);
-    } else {
+    } else if (arguments[1] == undefined) {
       // random shortener
+    } else {
+      bot.sendMessage({
+        to: channelID,
+        message: `:x: There is no shortener by the name of \`${arguments[1]}\`!`
+      });
     }
   }
 });
