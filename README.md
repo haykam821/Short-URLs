@@ -1,4 +1,4 @@
-Welcome to the *most official* Onebot plugin for creating <sup>and soon expanding<sup> short URLs.
+Welcome to the *most official* Onebot plugin for creating <sup>and soon expanding</sup> short URLs.
 
 ## Shortening
 
