@@ -34,7 +34,7 @@ function googleShorten(longUrl, bot, event, doc) {
     if (error) throw new Error(error);
 
     bot.sendMessage({
-      to: channelID,
+      to: event.d.channel_id,
       message: body.id
     })
 });
