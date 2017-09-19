@@ -1,5 +1,11 @@
 Welcome to the *most official* Onebot plugin for creating (and soon expanding) short URLs.
 
+## Configuration
+
+To let Onebot load this plugin, simply drag-and-drop `Short-URLs.obp.js` into your Onebot installation's plugin folder. Onebot automatically tries to create one if it doesn't exist when you start it up, but if that doesn't happen, create `./plugins`.
+
+There are two API keys you will need to enter (`googleShortenKey` and `bitlyShortenKey`). In a future update they'll be disableable by leaving the API keys blank.
+
 ## Shortening
 
 The command format is pretty simple:
