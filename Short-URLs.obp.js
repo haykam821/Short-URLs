@@ -18,12 +18,6 @@ const shorteners = {
   'bit.ly': [
     'bit.ly',
     'bitly',
-  ],
-  'ow.ly': [
-    'ow.ly',
-    'owly',
-    'owl',
-    'owie', // oof, ouch
   ]
 };
 
@@ -31,9 +25,6 @@ function googleShorten(longUrl, bot, event) {
 
 }
 function bitShorten(longUrl, bot, event) {
-
-}
-function owlShorten(longUrl, bot, event) {
 
 }
 
@@ -60,12 +51,9 @@ exports.onMessageReceived = (function ShortURLs(bot, doc, user, userID, channelI
     } else if (shorteners['bit.ly'].indexOf(arguments[1]) > -1) {
       // do bit.ly api call here
       bitShorten(arguments[0], bot, event);
-    } else if (shorteners['ow.ly'].indexOf(arguments[1]) > -1) {
-      // do ow.ly api call here
-      owlShorten(arguments[0], bot, event);
     } else if (arguments[1] == undefined) {
       // random shortener
-      var shortenerId = randInt(0, 2);
+      var shortenerId = randInt(0, 1);
 
       if (shortenerId === 0) {
         // do goo.gl api call here
@@ -73,9 +61,6 @@ exports.onMessageReceived = (function ShortURLs(bot, doc, user, userID, channelI
       } else if (shortenerId === 1) {
         // do bit.ly api call here
         bitShorten(arguments[0], bot, event);
-      } else if (shortenerId === 2) {
-        // do ow.ly api call here
-        owlShorten(arguments[0], bot, event);
       }
     } else {
       bot.sendMessage({
