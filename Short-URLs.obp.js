@@ -27,7 +27,7 @@ function googleShorten(longUrl, bot, event, doc) {
     url: 'https://www.googleapis.com/urlshortener/v1/url',
     qs: { key: doc.googleShortenKey },
     headers: { 'content-type': 'application/json' },
-    body: { longUrl: 'http://www.google.com/' },
+    body: { longUrl: longUrl },
     json: true };
 
   request(options, function (error, response, body) {
