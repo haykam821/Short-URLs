@@ -35,10 +35,24 @@ function googleShorten(longUrl, bot, event, doc) {
 
     bot.sendMessage({
       to: event.d.channel_id,
-      message: body.id
-    })
+      embed: {
+        title: 'Shortened URL',
+        color: 0x77b255,
+        timestamp: new Date(),
+        description: ':white_check_mark: The URL was sucessfully shortened.',
+        fields: [
+          {
+            name: 'Short URL',
+            value: body.id
+          },
+          {
+            name: 'Long URL',
+            value: body.longUrl
+          }
+        ]
+      }
+    });
 });
-
 }
 function bitShorten(longUrl, bot, event, doc) {
 
